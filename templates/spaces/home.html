@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Testify — collect testimonials{% endblock %}
+{% block content %}
+<section class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-teal-900 px-8 py-16 text-white shadow-lg">
+  <div class="absolute inset-0 opacity-30" style="background-image:radial-gradient(circle at 20% 20%, #2dd4bf 0, transparent 40%),radial-gradient(circle at 80% 60%, #38bdf8 0, transparent 35%);"></div>
+  <div class="relative max-w-2xl">
+    <p class="font-display text-5xl leading-tight tracking-tight md:text-6xl">Testify</p>
+    <h1 class="mt-4 text-xl font-medium text-teal-100 md:text-2xl">Collect customer love. Publish a Wall of Love.</h1>
+    <p class="mt-4 max-w-lg text-slate-200">Create a space, share a link, moderate submissions, and showcase approved testimonials — no video stack required for MVP.</p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="{% url 'accounts:register' %}" class="rounded-md bg-accent px-5 py-2.5 font-semibold text-white hover:bg-accentdark">Start free</a>
+      <a href="{% url 'accounts:login' %}" class="rounded-md border border-white/30 px-5 py-2.5 font-semibold text-white hover:bg-white/10">Log in</a>
+    </div>
+  </div>
+</section>
+
+<section class="mt-14 grid gap-8 md:grid-cols-3">
+  <div>
+    <h2 class="font-display text-xl">1. Create a Space</h2>
+    <p class="mt-2 text-slate-600">Brand your collection page with title, message, theme, and optional ratings.</p>
+  </div>
+  <div>
+    <h2 class="font-display text-xl">2. Collect</h2>
+    <p class="mt-2 text-slate-600">Customers submit text testimonials with consent — no account needed.</p>
+  </div>
+  <div>
+    <h2 class="font-display text-xl">3. Publish</h2>
+    <p class="mt-2 text-slate-600">Approve from your inbox. Approved stories land on your public wall.</p>
+  </div>
+</section>
+{% endblock %}

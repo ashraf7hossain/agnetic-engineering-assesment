@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Testify{% endblock %}
+{% block content %}
+<div class="mb-8 flex items-end justify-between gap-4">
+  <div>
+    <h1 class="font-display text-3xl">Your spaces</h1>
+    <p class="mt-1 text-slate-600">Manage collection pages and moderation inboxes.</p>
+  </div>
+  <a href="{% url 'spaces:create' %}" class="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accentdark">New space</a>
+</div>
+
+{% if spaces %}
+<ul class="divide-y divide-slate-200 rounded-xl border border-slate-200 bg-white">
+  {% for space in spaces %}
+  <li class="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <a href="{% url 'spaces:detail' space.slug %}" class="font-semibold text-ink hover:text-accent">{{ space.name }}</a>
+      <p class="text-sm text-slate-500">/s/{{ space.slug }}/ · {{ space.testimonials.count }} submissions</p>
+    </div>
+    <div class="flex flex-wrap gap-2 text-sm">
+      <a class="rounded-md border border-slate-200 px-3 py-1.5 hover:border-accent hover:text-accent" href="{% url 'spaces:inbox' space.slug %}">Inbox</a>
+      <a class="rounded-md border border-slate-200 px-3 py-1.5 hover:border-accent hover:text-accent" href="{% url 'spaces:collect' space.slug %}">Collect</a>
+      <a class="rounded-md border border-slate-200 px-3 py-1.5 hover:border-accent hover:text-accent" href="{% url 'spaces:wall' space.slug %}">Wall</a>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<div class="rounded-xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
+  <p class="text-slate-600">No spaces yet.</p>
+  <a href="{% url 'spaces:create' %}" class="mt-4 inline-block rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accentdark">Create your first space</a>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Inbox — {{ space.name }}{% endblock %}
+{% block content %}
+<div class="mb-6 flex flex-wrap items-end justify-between gap-4">
+  <div>
+    <a href="{% url 'spaces:detail' space.slug %}" class="text-sm text-accent hover:underline">← {{ space.name }}</a>
+    <h1 class="font-display text-3xl">Inbox</h1>
+  </div>
+  <div class="flex gap-2 text-sm">
+    {% for value, label in statuses.choices %}
+    <a href="?status={{ value }}"
+       class="rounded-md px-3 py-1.5 {% if status == value %}bg-ink text-white{% else %}border border-slate-200 bg-white hover:border-accent{% endif %}">
+      {{ label }}
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+<div id="inbox-list" class="space-y-3">
+  {% for t in testimonials %}
+    {% include "spaces/partials/inbox_item.html" with t=t space=space %}
+  {% empty %}
+  <p class="rounded-xl border border-dashed border-slate-300 bg-white px-6 py-10 text-center text-slate-500">No {{ status }} testimonials.</p>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+<form
+  id="collect-form"
+  method="post"
+  action="{% url 'spaces:collect_submit' space.slug %}"
+  hx-post="{% url 'spaces:collect_submit' space.slug %}"
+  hx-target="#collect-root"
+  hx-swap="innerHTML"
+  class="space-y-4">
+  {% csrf_token %}
+  {% for field in form %}
+  <div>
+    {% if field.name == "consent" %}
+    <label class="flex items-start gap-2 text-sm">
+      {{ field }}
+      <span>I consent to publish this testimonial publicly.</span>
+    </label>
+    {% elif field.name == "rating" %}
+    <p class="mb-1 text-sm font-medium">Rating</p>
+    <div class="flex gap-3 text-sm">{{ field }}</div>
+    {% else %}
+    <label class="mb-1 block text-sm font-medium" for="{{ field.id_for_label }}">{{ field.label }}</label>
+    {{ field }}
+    {% endif %}
+    {% for error in field.errors %}<p class="mt-1 text-sm text-red-500">{{ error }}</p>{% endfor %}
+  </div>
+  {% endfor %}
+  <button type="submit" class="w-full rounded-md bg-accent px-4 py-2.5 font-semibold text-white hover:bg-accentdark">
+    Submit testimonial
+  </button>
+</form>
+<style>
+  #collect-form input[type=text],
+  #collect-form input[type=email],
+  #collect-form textarea {
+    width: 100%; border: 1px solid #cbd5e1; border-radius: 0.375rem; padding: 0.5rem 0.75rem;
+    background: transparent;
+  }
+  #collect-form ul { list-style: none; padding: 0; margin: 0; display: flex; gap: 0.75rem; }
+  #collect-form ul li { display: flex; align-items: center; gap: 0.25rem; }
+</style>

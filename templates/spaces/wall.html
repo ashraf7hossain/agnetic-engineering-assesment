@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Wall of Love — {{ space.name }}{% endblock %}
+{% block extra_head %}
+{% if space.theme == "dark" %}
+<style>
+  body { background: #0f172a !important; color: #e2e8f0 !important; }
+  header, footer { background: transparent !important; border-color: #334155 !important; }
+</style>
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="mb-10 text-center">
+  {% if space.logo_url %}
+  <img src="{{ space.logo_url }}" alt="" class="mx-auto mb-4 h-12 w-auto object-contain">
+  {% endif %}
+  <p class="text-sm uppercase tracking-wider text-teal-500">{{ space.name }}</p>
+  <h1 class="font-display mt-2 text-4xl {% if space.theme == "dark" %}text-white{% endif %}">Wall of Love</h1>
+  <p class="mt-2 {% if space.theme == "dark" %}text-slate-300{% else %}text-slate-600{% endif %}">Approved customer testimonials</p>
+</div>
+
+{% if testimonials %}
+<div class="columns-1 gap-4 sm:columns-2">
+  {% for t in testimonials %}
+  <article class="mb-4 break-inside-avoid rounded-xl border {% if space.theme == "dark" %}border-slate-700 bg-slate-900{% else %}border-slate-200 bg-white{% endif %} p-5 shadow-sm">
+    {% if t.rating %}
+    <p class="mb-2 text-amber-400">{% for i in "12345" %}{% if forloop.counter <= t.rating %}★{% else %}☆{% endif %}{% endfor %}</p>
+    {% endif %}
+    <p class="whitespace-pre-wrap leading-relaxed {% if space.theme == "dark" %}text-slate-200{% else %}text-slate-700{% endif %}">{{ t.body }}</p>
+    <p class="mt-4 text-sm font-semibold {% if space.theme == "dark" %}text-teal-300{% else %}text-ink{% endif %}">— {{ t.name }}</p>
+  </article>
+  {% endfor %}
+</div>
+{% else %}
+<p class="rounded-xl border border-dashed {% if space.theme == "dark" %}border-slate-600{% else %}border-slate-300{% endif %} px-6 py-12 text-center text-slate-500">
+  No approved testimonials yet.
+</p>
+{% endif %}
+{% endblock %}
