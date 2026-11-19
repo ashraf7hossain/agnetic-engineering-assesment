@@ -40,9 +40,21 @@ App: http://127.0.0.1:8000/ · DB: `postgres://testify:testify@localhost:5432/te
 
 ## Tests
 
+### Django unit/integration
+
 ```bash
 python manage.py test
 ```
+
+### Playwright e2e
+
+```bash
+npm install
+npx playwright install chromium
+npm run test:e2e
+```
+
+Specs live in `e2e/`. Local Playwright MCP is configured in `.cursor/mcp.json` (`@playwright/mcp`) — reload Cursor MCP after clone.
 
 ## Project layout
 
@@ -57,6 +69,20 @@ docs/instructions.md
 ## Env vars
 
 See `.env.example`. Leave `DATABASE_URL` empty for SQLite.
+
+## Demo screenshots & recording
+
+See [`docs/DEMO.md`](docs/DEMO.md).
+
+- Screenshots: `docs/screenshots/*.png`
+- Recording: `docs/demo/testify-demo.mp4` (also `.webm`)
+
+Regenerate:
+
+```bash
+python manage.py runserver
+python scripts/capture_demo.py
+```
 
 ## Out of scope (MVP)
 

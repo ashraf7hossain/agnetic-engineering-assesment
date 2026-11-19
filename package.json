@@ -1,0 +1,13 @@
+{
+  "name": "testify",
+  "private": true,
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed"
+  },
+  "devDependencies": {
+    "@playwright/mcp": "^0.0.54",
+    "@playwright/test": "^1.57.0"
+  }
+}
